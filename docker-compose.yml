@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  web:
+    restart: always
+    build: ./app
+    expose:
+      - "5000"
+    links:
+      - postgres:postgres
+    volumes:
+      - web-data:/usr/src/app/static
+    env_file:
+      - .env
+    command: /usr/local/bin/gunicorn -w 2 -b :8000 app:app
+
+  postgres:
+    restart: always
+    image: postgres:latest
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  db-data:

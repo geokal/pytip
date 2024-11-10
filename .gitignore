@@ -1,0 +1,9 @@
+*swp
+*db
+.cache
+**__pycache__/
+venv
+Procfile
+.env
+.pytest*
+runtime
